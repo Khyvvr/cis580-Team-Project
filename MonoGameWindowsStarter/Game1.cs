@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace MonoGameWindowsStarter
 {
@@ -12,10 +13,19 @@ namespace MonoGameWindowsStarter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Player player;
+
+        // map and map renderer
+        //private TiledMap map;
+        //private TiledMapRenderer mapRenderer;
+
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics = new GraphicsDeviceManager(this);
+
+
+            player = new Player(this);
         }
 
         /// <summary>
@@ -27,6 +37,11 @@ namespace MonoGameWindowsStarter
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = 1500;
+            graphics.PreferredBackBufferHeight = 900;
+            graphics.ApplyChanges();
+
+            player.Initialize();
 
             base.Initialize();
         }
@@ -41,6 +56,12 @@ namespace MonoGameWindowsStarter
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            // load and initialize map and mapRenderer
+            //map = Content.Load<TiledMap>("overworld");
+            //mapRenderer = new TiledMapRenderer(GraphicsDevice);
+
+            player.LoadContent(Content);
         }
 
         /// <summary>
@@ -63,6 +84,10 @@ namespace MonoGameWindowsStarter
                 Exit();
 
             // TODO: Add your update logic here
+            player.Update(gameTime);
+
+            //update mapRenderer
+            //mapRenderer.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -76,6 +101,10 @@ namespace MonoGameWindowsStarter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            //mapRenderer.LoadMap(map);
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

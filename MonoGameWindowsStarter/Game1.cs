@@ -14,6 +14,7 @@ namespace MonoGameWindowsStarter
         SpriteBatch spriteBatch;
 
         Player player;
+        Walls walls;
 
         // map and map renderer
         //private TiledMap map;
@@ -24,8 +25,8 @@ namespace MonoGameWindowsStarter
             Content.RootDirectory = "Content";
             graphics = new GraphicsDeviceManager(this);
 
-
             player = new Player(this);
+            walls = new Walls(this);
         }
 
         /// <summary>
@@ -42,6 +43,7 @@ namespace MonoGameWindowsStarter
             graphics.ApplyChanges();
 
             player.Initialize();
+            walls.Initialize();
 
             base.Initialize();
         }
@@ -62,6 +64,7 @@ namespace MonoGameWindowsStarter
             //mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
             player.LoadContent(Content);
+            walls.LoadContent(Content);
         }
 
         /// <summary>
@@ -98,12 +101,15 @@ namespace MonoGameWindowsStarter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.LimeGreen);
 
             // TODO: Add your drawing code here
             //mapRenderer.LoadMap(map);
             spriteBatch.Begin();
+            
             player.Draw(spriteBatch);
+            walls.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);

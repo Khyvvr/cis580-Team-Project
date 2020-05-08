@@ -25,7 +25,7 @@ namespace MonoGameWindowsStarter
         Texture2D texture;
 
         const int FRAMERATE = 124;
-        const float PLAYER_SPEED = 0.25f;
+        const float PLAYER_SPEED = 0.40f;
         const int FRAME_WIDTH = 16;
         const int FRAME_HEIGHT = 31;
 

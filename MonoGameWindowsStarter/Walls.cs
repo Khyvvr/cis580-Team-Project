@@ -53,6 +53,11 @@ namespace MonoGameWindowsStarter
             texture = content.Load<Texture2D>("pixel");
         }
 
+        public void Update(GameTime gameTime)
+        {
+
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, wallN, Color.Brown);

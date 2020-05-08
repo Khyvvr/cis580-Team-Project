@@ -88,6 +88,7 @@ namespace MonoGameWindowsStarter
 
             // TODO: Add your update logic here
             player.Update(gameTime);
+            walls.Update(gameTime);
 
             //update mapRenderer
             //mapRenderer.Update(gameTime);
@@ -103,9 +104,14 @@ namespace MonoGameWindowsStarter
         {
             GraphicsDevice.Clear(Color.LimeGreen);
 
+            var offset = new Vector2(750,500);
+            offset.X -= player.Bounds.X;
+            offset.Y -= player.Bounds.Y;
+            var tMatrix = Matrix.CreateTranslation(offset.X, offset.Y, 0);
+
             // TODO: Add your drawing code here
             //mapRenderer.LoadMap(map);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, tMatrix);
             
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);

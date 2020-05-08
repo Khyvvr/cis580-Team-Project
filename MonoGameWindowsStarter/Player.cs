@@ -16,7 +16,7 @@ namespace MonoGameWindowsStarter
         East = 1,
         West = 3,
         North = 2,
-        Idle = 0,
+        Idle = 4,
     }
 
     public class Player
@@ -25,9 +25,9 @@ namespace MonoGameWindowsStarter
         Texture2D texture;
 
         const int FRAMERATE = 124;
-        const float PLAYER_SPEED = 1;
-        const int FRAME_WIDTH = 17;
-        const int FRAME_HEIGHT = 23;
+        const float PLAYER_SPEED = 0.25f;
+        const int FRAME_WIDTH = 16;
+        const int FRAME_HEIGHT = 31;
 
         public BoundingRectangle Bounds;
         State state;
@@ -102,6 +102,7 @@ namespace MonoGameWindowsStarter
                 frame++;
                 timer -= new TimeSpan(0, 0, 0, 0, FRAMERATE);
             }
+            frame %= 4;
 
             //Collision with World Borders
             if (Bounds.X < 0)

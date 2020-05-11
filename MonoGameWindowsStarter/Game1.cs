@@ -95,6 +95,24 @@ namespace MonoGameWindowsStarter
             player.Update(gameTime);
             walls.Update(gameTime);
 
+            //Collision with World Borders
+            if (player.Bounds.X < walls.WallW.X + walls.WallW.Width)
+            {
+                player.Bounds.X = walls.WallW.X + walls.WallW.Width;
+            }
+            if (player.Bounds.X + player.Bounds.Width > walls.WallE.X)
+            {
+                player.Bounds.X = walls.WallE.X - player.Bounds.Width;
+            }
+            if (player.Bounds.Y < walls.WallN.Y + walls.WallN.Height)
+            {
+                player.Bounds.Y = walls.WallN.Y + walls.WallN.Height;
+            }
+            if (player.Bounds.Y + player.Bounds.Height > walls.WallS.Y)
+            {
+                player.Bounds.Y = walls.WallS.Y - player.Bounds.Height;
+            }
+
             //update mapRenderer
             //mapRenderer.Update(gameTime);
 

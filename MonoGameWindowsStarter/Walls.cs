@@ -15,10 +15,10 @@ namespace MonoGameWindowsStarter
         Game1 game;
         Texture2D texture;
 
-        BoundingRectangle wallN;
-        BoundingRectangle wallS;
-        BoundingRectangle wallE;
-        BoundingRectangle wallW;
+        public BoundingRectangle WallN;
+        public BoundingRectangle WallS;
+        public BoundingRectangle WallE;
+        public BoundingRectangle WallW;
 
         public Walls(Game1 game)
         {
@@ -27,25 +27,25 @@ namespace MonoGameWindowsStarter
 
         public void Initialize()
         {
-            wallN.X = -50;
-            wallN.Y = -50;
-            wallN.Width = 1850;
-            wallN.Height = 50;
+            WallN.X = -50;
+            WallN.Y = -50;
+            WallN.Width = 1850;
+            WallN.Height = 50;
 
-            wallS.X = -50;
-            wallS.Y = 1000;
-            wallS.Width = 1850;
-            wallS.Height = 50;
+            WallS.X = -50;
+            WallS.Y = 1000;
+            WallS.Width = 1850;
+            WallS.Height = 50;
 
-            wallE.X = 1750;
-            wallE.Y = 0;
-            wallE.Width = 50;
-            wallE.Height = 1000;
+            WallE.X = 1750;
+            WallE.Y = 0;
+            WallE.Width = 50;
+            WallE.Height = 1000;
 
-            wallW.X = -50;
-            wallW.Y = 0;
-            wallW.Width = 50;
-            wallW.Height = 1000;
+            WallW.X = -50;
+            WallW.Y = 0;
+            WallW.Width = 50;
+            WallW.Height = 1000;
         }
 
         public void LoadContent(ContentManager content)
@@ -60,10 +60,10 @@ namespace MonoGameWindowsStarter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, wallN, Color.Brown);
-            spriteBatch.Draw(texture, wallS, Color.Brown);
-            spriteBatch.Draw(texture, wallE, Color.Brown);
-            spriteBatch.Draw(texture, wallW, Color.Brown);
+            spriteBatch.Draw(texture, WallN, Color.Brown);
+            spriteBatch.Draw(texture, WallS, Color.Brown);
+            spriteBatch.Draw(texture, WallE, Color.Brown);
+            spriteBatch.Draw(texture, WallW, Color.Brown);
         }
 	}
 }

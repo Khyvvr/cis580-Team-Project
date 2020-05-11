@@ -103,24 +103,6 @@ namespace MonoGameWindowsStarter
                 timer -= new TimeSpan(0, 0, 0, 0, FRAMERATE);
             }
             frame %= 4;
-
-            //Collision with World Borders
-            if (Bounds.X < 0)
-            {
-                Bounds.X = 0;
-            }
-            if (Bounds.X + Bounds.Width > 1500)
-            {
-                Bounds.X = 1500 - Bounds.Width;
-            }
-            if (Bounds.Y < 0)
-            {
-                Bounds.Y = 0;
-            }
-            if (Bounds.Y + Bounds.Height > 1000)
-            {
-                Bounds.Y = 1000 - Bounds.Height;
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

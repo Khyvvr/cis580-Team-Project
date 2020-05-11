@@ -15,10 +15,12 @@ namespace MonoGameWindowsStarter
 
         Player player;
         Walls walls;
-        Hub hub;
-        Foutain fountain;
 
-        Fire fire;
+        SpriteFont font;
+        //Hub hub;
+        //Foutain fountain;
+
+        //Fire fire;
 
         // map and map renderer
         //private TiledMap map;
@@ -31,10 +33,10 @@ namespace MonoGameWindowsStarter
 
             player = new Player(this);
             walls = new Walls(this);
-            hub = new Hub(this);
-            fountain = new Foutain(this);
+            //hub = new Hub(this);
+            //fountain = new Foutain(this);
 
-            fire = new Fire(this, new Vector2(750, 750), 50, 75, 15, 16, 0.40f);
+            //fire = new Fire(this, new Vector2(750, 750), 50, 75, 15, 16, 0.40f);
         }
 
         /// <summary>
@@ -52,12 +54,12 @@ namespace MonoGameWindowsStarter
 
             player.Initialize();
             walls.Initialize();
-            hub.Initialize();
-            player.Bounds.X = hub.PlayerSpawn.X;
-            player.Bounds.Y = hub.PlayerSpawn.Y;
-            fountain.Initialize();
+            //hub.Initialize();
+            player.Bounds.X = 75;
+            player.Bounds.Y = 75;
+            //fountain.Initialize();
 
-            fire.Initialize();
+            //fire.Initialize();
 
             base.Initialize();
         }
@@ -79,10 +81,12 @@ namespace MonoGameWindowsStarter
 
             player.LoadContent(Content);
             walls.LoadContent(Content);
-            hub.LoadContent(Content);
-            fountain.LoadContent(Content);
+            font = Content.Load<SpriteFont>("Calibri");
 
-            fire.LoadContent(Content);
+            //hub.LoadContent(Content);
+            //fountain.LoadContent(Content);
+
+            //fire.LoadContent(Content);
         }
 
         /// <summary>
@@ -108,6 +112,15 @@ namespace MonoGameWindowsStarter
             player.Update(gameTime);
             walls.Update(gameTime);
 
+            if ((player.Bounds.CollidesWith(walls.WallN))
+                || (player.Bounds.CollidesWith(walls.WallS))
+                || (player.Bounds.CollidesWith(walls.WallE))
+                || (player.Bounds.CollidesWith(walls.WallW)))
+            {
+                player.gameState = GameState.Over;
+            }
+
+            
             //Collision with World Borders
             if (player.Bounds.X < walls.WallW.X + walls.WallW.Width)
             {
@@ -125,28 +138,29 @@ namespace MonoGameWindowsStarter
             {
                 player.Bounds.Y = walls.WallS.Y - player.Bounds.Height;
             }
-
+            
+            /*
             //player collision with hub objects
             if(player.Bounds.CollidesWith(hub.CabinBounds))
             {
                 if(player.Bounds.X + player.Bounds.Width > hub.CabinBounds.X)
                 {
-                    player.Bounds.X = hub.CabinBounds.X - player.Bounds.Width;
+                    player.Bounds.X = hub.CabinBounds.X - player.Bounds.Width - 1;
                 }
                 else if (player.Bounds.X < hub.CabinBounds.X + hub.CabinBounds.Width)
                 {
-                    player.Bounds.X = hub.CabinBounds.X + hub.CabinBounds.Width;
+                    player.Bounds.X = hub.CabinBounds.X + hub.CabinBounds.Width + 1;
                 }
                 else if (player.Bounds.Y + player.Bounds.Height > hub.CabinBounds.Y)
                 {
-                    player.Bounds.Y = hub.CabinBounds.Y - player.Bounds.Height;
+                    player.Bounds.Y = hub.CabinBounds.Y - player.Bounds.Height - 1;
                 }
                 else if (player.Bounds.Y < hub.CabinBounds.Y + hub.CabinBounds.Height)
                 {
-                    player.Bounds.Y = hub.CabinBounds.Y + hub.CabinBounds.Height;
+                    player.Bounds.Y = hub.CabinBounds.Y + hub.CabinBounds.Height + 1;
                 }
             }
-
+            */
 
 
             //update mapRenderer
@@ -174,10 +188,29 @@ namespace MonoGameWindowsStarter
             
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);
-            hub.Draw(spriteBatch);
-            fountain.Draw(spriteBatch);
 
-            fire.Draw(spriteBatch);
+            var textOffset1 = offset * -1;
+            textOffset1.X += 5;
+            textOffset1.Y += 5;
+            var textOffset2 = offset * -1;
+            textOffset2.X += 5;
+            textOffset2.Y += 35;
+
+            spriteBatch.DrawString(font, "Reach the goal in the bottom-right corner", textOffset1, Color.White);
+            spriteBatch.DrawString(font, "Don't touch the walls", textOffset2, Color.White);
+
+            if (player.gameState == GameState.Over)
+            {
+                var textOffsetGameOver = offset * -1;
+                textOffsetGameOver.X += 750;
+                textOffsetGameOver.Y += 500;
+                spriteBatch.DrawString(font, "Game Over", textOffsetGameOver, Color.White);
+            }
+
+            //hub.Draw(spriteBatch);
+            //fountain.Draw(spriteBatch);
+
+            //fire.Draw(spriteBatch);
 
             spriteBatch.End();
 

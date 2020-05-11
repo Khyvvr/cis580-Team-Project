@@ -29,23 +29,23 @@ namespace MonoGameWindowsStarter
         {
             WallN.X = -50;
             WallN.Y = -50;
-            WallN.Width = 1850;
+            WallN.Width = 2050;
             WallN.Height = 50;
 
             WallS.X = -50;
-            WallS.Y = 1000;
-            WallS.Width = 1850;
+            WallS.Y = 1950;
+            WallS.Width = 2050;
             WallS.Height = 50;
 
-            WallE.X = 1750;
+            WallE.X = 1950;
             WallE.Y = 0;
             WallE.Width = 50;
-            WallE.Height = 1000;
+            WallE.Height = 1950;
 
             WallW.X = -50;
             WallW.Y = 0;
             WallW.Width = 50;
-            WallW.Height = 1000;
+            WallW.Height = 1950;
         }
 
         public void LoadContent(ContentManager content)

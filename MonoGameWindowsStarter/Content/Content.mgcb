@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:cabin.png
 
+#begin Calibri.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Calibri.spritefont
+
 #begin fire.png
 /importer:TextureImporter
 /processor:TextureProcessor

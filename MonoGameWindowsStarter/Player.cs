@@ -19,6 +19,12 @@ namespace MonoGameWindowsStarter
         Idle = 4,
     }
 
+    public enum GameState
+    {
+        Game = 0,
+        Over = 1,
+    }
+
     public class Player
     {
         Game1 game;
@@ -30,19 +36,21 @@ namespace MonoGameWindowsStarter
         const int FRAME_HEIGHT = 31;
 
         public BoundingRectangle Bounds;
-        State state;
+        State animationState;
         TimeSpan timer;
         int frame;
         public Vector2 Position;
         Vector2 origin;
+        public GameState gameState;
 
         public Player(Game1 game)
         {
             this.game = game;
             timer = new TimeSpan(0);
-            state = State.Idle;
+            animationState = State.Idle;
             Position = new Vector2(500, 500);
             origin = new Vector2(0, 0);
+            gameState = GameState.Game;
         }
 
         public void Initialize()
@@ -69,31 +77,31 @@ namespace MonoGameWindowsStarter
             //State Change and player movement
             if (keyboardState.IsKeyDown(Keys.Up))
             {
-                state = State.North;
+                animationState = State.North;
                 Bounds.Y -= delta * PLAYER_SPEED;
             }
             else if (keyboardState.IsKeyDown(Keys.Left))
             {
-                state = State.West;
+                animationState = State.West;
                 Bounds.X -= delta * PLAYER_SPEED;
             }
             else if (keyboardState.IsKeyDown(Keys.Right))
             {
-                state = State.East;
+                animationState = State.East;
                 Bounds.X += delta * PLAYER_SPEED;
             }
             else if (keyboardState.IsKeyDown(Keys.Down))
             {
-                state = State.South;
+                animationState = State.South;
                 Bounds.Y += delta * PLAYER_SPEED;
             }
             else
             {
-                state = State.Idle;
+                animationState = State.Idle;
             }
 
             //Animation timer
-            if (state != State.Idle)
+            if (animationState != State.Idle)
             {
                 timer += gameTime.ElapsedGameTime;
             }
@@ -109,7 +117,7 @@ namespace MonoGameWindowsStarter
         {
             var source = new Rectangle(
                 frame * FRAME_WIDTH,
-                (int)state % 4 * FRAME_HEIGHT,
+                (int)animationState % 4 * FRAME_HEIGHT,
                 FRAME_WIDTH,
                 FRAME_HEIGHT);
 

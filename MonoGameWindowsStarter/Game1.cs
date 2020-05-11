@@ -15,6 +15,7 @@ namespace MonoGameWindowsStarter
 
         Player player;
         Walls walls;
+        Hub hub;
 
         Object fire;
 
@@ -29,6 +30,8 @@ namespace MonoGameWindowsStarter
 
             player = new Player(this);
             walls = new Walls(this);
+            hub = new Hub(this);
+
             fire = new Object(this, new Vector2(750, 750), 50, 75, 15, 16, 7, 0.40f);
         }
 
@@ -47,6 +50,10 @@ namespace MonoGameWindowsStarter
 
             player.Initialize();
             walls.Initialize();
+            hub.Initialize();
+            player.Bounds.X = hub.PlayerSpawn.X;
+            player.Bounds.Y = hub.PlayerSpawn.Y;
+
             fire.Initialize();
 
             base.Initialize();
@@ -69,6 +76,8 @@ namespace MonoGameWindowsStarter
 
             player.LoadContent(Content);
             walls.LoadContent(Content);
+            hub.LoadContent(Content);
+
             fire.LoadContent(Content);
         }
 
@@ -113,6 +122,29 @@ namespace MonoGameWindowsStarter
                 player.Bounds.Y = walls.WallS.Y - player.Bounds.Height;
             }
 
+            //player collision with hub objects
+            if(player.Bounds.CollidesWith(hub.CabinBounds))
+            {
+                if(player.Bounds.X + player.Bounds.Width > hub.CabinBounds.X)
+                {
+                    player.Bounds.X = hub.CabinBounds.X - player.Bounds.Width;
+                }
+                else if (player.Bounds.X < hub.CabinBounds.X + hub.CabinBounds.Width)
+                {
+                    player.Bounds.X = hub.CabinBounds.X + hub.CabinBounds.Width;
+                }
+                else if (player.Bounds.Y + player.Bounds.Height > hub.CabinBounds.Y)
+                {
+                    player.Bounds.Y = hub.CabinBounds.Y - player.Bounds.Height;
+                }
+                else if (player.Bounds.Y < hub.CabinBounds.Y + hub.CabinBounds.Height)
+                {
+                    player.Bounds.Y = hub.CabinBounds.Y + hub.CabinBounds.Height;
+                }
+            }
+
+
+
             //update mapRenderer
             //mapRenderer.Update(gameTime);
 
@@ -138,6 +170,8 @@ namespace MonoGameWindowsStarter
             
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);
+            hub.Draw(spriteBatch);
+
             fire.Draw(spriteBatch);
 
             spriteBatch.End();

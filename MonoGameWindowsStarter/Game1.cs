@@ -16,6 +16,8 @@ namespace MonoGameWindowsStarter
         Player player;
         Walls walls;
 
+        Object fire;
+
         // map and map renderer
         //private TiledMap map;
         //private TiledMapRenderer mapRenderer;
@@ -27,6 +29,7 @@ namespace MonoGameWindowsStarter
 
             player = new Player(this);
             walls = new Walls(this);
+            fire = new Object(this, new Vector2(750, 750), 50, 75, 15, 16, 7, 0.40f);
         }
 
         /// <summary>
@@ -44,6 +47,7 @@ namespace MonoGameWindowsStarter
 
             player.Initialize();
             walls.Initialize();
+            fire.Initialize();
 
             base.Initialize();
         }
@@ -65,6 +69,7 @@ namespace MonoGameWindowsStarter
 
             player.LoadContent(Content);
             walls.LoadContent(Content);
+            fire.LoadContent(Content);
         }
 
         /// <summary>
@@ -115,6 +120,7 @@ namespace MonoGameWindowsStarter
             
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);
+            fire.Draw(spriteBatch);
 
             spriteBatch.End();
 

@@ -16,7 +16,7 @@ namespace MonoGameWindowsStarter
         Paused = 1,
     }
 
-    public class Object
+    public class Fire
     {
         Game1 game;
         Texture2D texture;
@@ -32,16 +32,14 @@ namespace MonoGameWindowsStarter
         Vector2 origin;                     // object's origin
         TimeSpan animationTimer;            // timer for animations
         int frame;                          // current frame of object
-        int amoundOfFrames;                 // amount of frames in objects animation
 
 
-        public Object(Game1 game, Vector2 position, int width, int height, int widthOfFrame, int heightOfFrame, int frames, float speed)
+        public Fire(Game1 game, Vector2 position, int width, int height, int widthOfFrame, int heightOfFrame, float speed)
         {
             this.game = game;
             this.position = position;
             this.FRAME_WIDTH = widthOfFrame;
             this.FRAME_HEIGHT = heightOfFrame;
-            this.amoundOfFrames = frames;
             this.OBJECT_SPEED = speed;
             origin = new Vector2(0, 0);
 
@@ -61,7 +59,7 @@ namespace MonoGameWindowsStarter
 
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("gfx/objects");
+            texture = content.Load<Texture2D>("fire");
         }
 
         public void Update(GameTime gameTime)
@@ -69,7 +67,7 @@ namespace MonoGameWindowsStarter
             float delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             //Animation timer
-            /*
+            
             if (state != objectState.Paused)
             {
                 animationTimer += gameTime.ElapsedGameTime;
@@ -80,8 +78,8 @@ namespace MonoGameWindowsStarter
                 animationTimer -= new TimeSpan(0, 0, 0, 0, FRAMERATE);
             }
 
-            frame %= amoundOfFrames;    // keep frame within bounds
-            */
+            frame %= 7;    // keep frame within bounds
+            
         }
 
 
@@ -89,7 +87,7 @@ namespace MonoGameWindowsStarter
         {
             var source = new Rectangle(
                 frame * FRAME_WIDTH,
-                (int)state % amoundOfFrames * FRAME_HEIGHT,
+                (int)state * FRAME_HEIGHT,
                 FRAME_WIDTH,
                 FRAME_HEIGHT);
 

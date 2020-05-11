@@ -17,7 +17,7 @@ namespace MonoGameWindowsStarter
         Walls walls;
         Hub hub;
 
-        Object fire;
+        Fire fire;
 
         // map and map renderer
         //private TiledMap map;
@@ -32,7 +32,7 @@ namespace MonoGameWindowsStarter
             walls = new Walls(this);
             hub = new Hub(this);
 
-            fire = new Object(this, new Vector2(750, 750), 50, 75, 15, 16, 7, 0.40f);
+            fire = new Fire(this, new Vector2(750, 750), 50, 75, 15, 16, 0.40f);
         }
 
         /// <summary>

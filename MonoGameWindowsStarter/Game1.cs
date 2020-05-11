@@ -201,10 +201,10 @@ namespace MonoGameWindowsStarter
             // TODO: Add your drawing code here
             //mapRenderer.LoadMap(map);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, tMatrix);
-            
+
+            spriteBatch.Draw(goalText, goal, Color.ForestGreen);
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);
-            spriteBatch.Draw(goalText, goal, Color.ForestGreen);
 
             var textOffset1 = offset * -1;
             textOffset1.X += 5;

@@ -122,7 +122,7 @@ namespace MonoGameWindowsStarter
                 FRAME_WIDTH,
                 FRAME_HEIGHT);
 
-            spriteBatch.Draw(texture, Bounds, source, Color.White, 0, origin, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, Bounds, source, Color.White, 0, origin, SpriteEffects.None, 0);
         }
     }
 }

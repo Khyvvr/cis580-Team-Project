@@ -16,7 +16,7 @@ namespace MonoGameWindowsStarter
         Player player;
         Walls walls;
         Hub hub;
-        Foutain foutain;
+        Foutain fountain;
 
         Fire fire;
 
@@ -32,7 +32,7 @@ namespace MonoGameWindowsStarter
             player = new Player(this);
             walls = new Walls(this);
             hub = new Hub(this);
-            foutain = new Foutain(this);
+            fountain = new Foutain(this);
 
             fire = new Fire(this, new Vector2(750, 750), 50, 75, 15, 16, 0.40f);
         }
@@ -55,6 +55,7 @@ namespace MonoGameWindowsStarter
             hub.Initialize();
             player.Bounds.X = hub.PlayerSpawn.X;
             player.Bounds.Y = hub.PlayerSpawn.Y;
+            fountain.Initialize();
 
             fire.Initialize();
 
@@ -79,7 +80,7 @@ namespace MonoGameWindowsStarter
             player.LoadContent(Content);
             walls.LoadContent(Content);
             hub.LoadContent(Content);
-            foutain.LoadContent(Content);
+            fountain.LoadContent(Content);
 
             fire.LoadContent(Content);
         }
@@ -174,7 +175,7 @@ namespace MonoGameWindowsStarter
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);
             hub.Draw(spriteBatch);
-            foutain.Draw(spriteBatch);
+            fountain.Draw(spriteBatch);
 
             fire.Draw(spriteBatch);
 

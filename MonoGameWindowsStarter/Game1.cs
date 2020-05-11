@@ -16,6 +16,9 @@ namespace MonoGameWindowsStarter
         Player player;
         Walls walls;
 
+        BoundingRectangle goal;
+        Texture2D goalText;
+
         SpriteFont font;
         //Hub hub;
         //Foutain fountain;
@@ -57,6 +60,11 @@ namespace MonoGameWindowsStarter
             //hub.Initialize();
             player.Bounds.X = 75;
             player.Bounds.Y = 75;
+
+            goal.Width = 120;
+            goal.Height = 120;
+            goal.X = walls.WallE.X - goal.Width;
+            goal.Y = walls.WallS.Y - goal.Height;
             //fountain.Initialize();
 
             //fire.Initialize();
@@ -82,6 +90,7 @@ namespace MonoGameWindowsStarter
             player.LoadContent(Content);
             walls.LoadContent(Content);
             font = Content.Load<SpriteFont>("Calibri");
+            goalText = Content.Load<Texture2D>("pixel");
 
             //hub.LoadContent(Content);
             //fountain.LoadContent(Content);
@@ -115,12 +124,20 @@ namespace MonoGameWindowsStarter
             if ((player.Bounds.CollidesWith(walls.WallN))
                 || (player.Bounds.CollidesWith(walls.WallS))
                 || (player.Bounds.CollidesWith(walls.WallE))
-                || (player.Bounds.CollidesWith(walls.WallW)))
+                || (player.Bounds.CollidesWith(walls.WallW))
+                || (player.Bounds.CollidesWith(walls.MazeWall01))
+                || (player.Bounds.CollidesWith(walls.MazeWall02)))
             {
+                player.playerSpeed *= 0;
                 player.gameState = GameState.Over;
             }
 
-            
+            if(player.Bounds.CollidesWith(goal))
+            {
+                player.gameState = GameState.Win;
+            }
+
+            /*
             //Collision with World Borders
             if (player.Bounds.X < walls.WallW.X + walls.WallW.Width)
             {
@@ -139,7 +156,6 @@ namespace MonoGameWindowsStarter
                 player.Bounds.Y = walls.WallS.Y - player.Bounds.Height;
             }
             
-            /*
             //player collision with hub objects
             if(player.Bounds.CollidesWith(hub.CabinBounds))
             {
@@ -175,7 +191,7 @@ namespace MonoGameWindowsStarter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LimeGreen);
+            GraphicsDevice.Clear(Color.Gray);
 
             var offset = new Vector2(750,500);
             offset.X -= player.Bounds.X;
@@ -188,6 +204,7 @@ namespace MonoGameWindowsStarter
             
             player.Draw(spriteBatch);
             walls.Draw(spriteBatch);
+            spriteBatch.Draw(goalText, goal, Color.ForestGreen);
 
             var textOffset1 = offset * -1;
             textOffset1.X += 5;
@@ -205,6 +222,13 @@ namespace MonoGameWindowsStarter
                 textOffsetGameOver.X += 750;
                 textOffsetGameOver.Y += 500;
                 spriteBatch.DrawString(font, "Game Over", textOffsetGameOver, Color.White);
+            }
+            if (player.gameState == GameState.Win)
+            {
+                var textOffsetWin = offset * -1;
+                textOffsetWin.X += 750;
+                textOffsetWin.Y += 500;
+                spriteBatch.DrawString(font, "You Win", textOffsetWin, Color.White);
             }
 
             //hub.Draw(spriteBatch);

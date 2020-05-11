@@ -23,6 +23,7 @@ namespace MonoGameWindowsStarter
     {
         Game = 0,
         Over = 1,
+        Win = 2,
     }
 
     public class Player
@@ -31,7 +32,7 @@ namespace MonoGameWindowsStarter
         Texture2D texture;
 
         const int FRAMERATE = 124;
-        const float PLAYER_SPEED = 0.40f;
+        public float playerSpeed = 0.40f;
         const int FRAME_WIDTH = 16;
         const int FRAME_HEIGHT = 31;
 
@@ -78,22 +79,22 @@ namespace MonoGameWindowsStarter
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 animationState = State.North;
-                Bounds.Y -= delta * PLAYER_SPEED;
+                Bounds.Y -= delta * playerSpeed;
             }
             else if (keyboardState.IsKeyDown(Keys.Left))
             {
                 animationState = State.West;
-                Bounds.X -= delta * PLAYER_SPEED;
+                Bounds.X -= delta * playerSpeed;
             }
             else if (keyboardState.IsKeyDown(Keys.Right))
             {
                 animationState = State.East;
-                Bounds.X += delta * PLAYER_SPEED;
+                Bounds.X += delta * playerSpeed;
             }
             else if (keyboardState.IsKeyDown(Keys.Down))
             {
                 animationState = State.South;
-                Bounds.Y += delta * PLAYER_SPEED;
+                Bounds.Y += delta * playerSpeed;
             }
             else
             {

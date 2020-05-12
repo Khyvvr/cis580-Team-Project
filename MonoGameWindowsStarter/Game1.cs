@@ -128,7 +128,12 @@ namespace MonoGameWindowsStarter
                 || (player.Bounds.CollidesWith(walls.MazeWall01))
                 || (player.Bounds.CollidesWith(walls.MazeWall02))
                 || (player.Bounds.CollidesWith(walls.MazeWall03))
-                || (player.Bounds.CollidesWith(walls.MazeWall04)))
+                || (player.Bounds.CollidesWith(walls.MazeWall04))
+                || (player.Bounds.CollidesWith(walls.MazeWall05))
+                || (player.Bounds.CollidesWith(walls.MazeWall06))
+                || (player.Bounds.CollidesWith(walls.MazeWall07))
+                || (player.Bounds.CollidesWith(walls.MazeWall08))
+                || (player.Bounds.CollidesWith(walls.MazeWall09)))
             {
                 player.playerSpeed *= 0;
                 player.gameState = GameState.Over;

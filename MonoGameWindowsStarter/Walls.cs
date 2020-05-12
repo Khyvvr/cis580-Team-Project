@@ -16,6 +16,7 @@ namespace MonoGameWindowsStarter
         Texture2D texture;
 
         const int WALL_WIDTH = 50;
+        const int CORRIDOR_WIDTH = 136;
 
         public BoundingRectangle WallN;
         public BoundingRectangle WallS;
@@ -24,6 +25,8 @@ namespace MonoGameWindowsStarter
 
         public BoundingRectangle MazeWall01;
         public BoundingRectangle MazeWall02;
+        public BoundingRectangle MazeWall03;
+        public BoundingRectangle MazeWall04;
 
         public Walls(Game1 game)
         {
@@ -52,15 +55,25 @@ namespace MonoGameWindowsStarter
             WallW.Width = WALL_WIDTH;
             WallW.Height = 1950;
 
-            MazeWall01.X = 100;
-            MazeWall01.Y = 230;
-            MazeWall01.Width = 400;
-            MazeWall01.Height = WALL_WIDTH;
-
             MazeWall02.X = 300;
             MazeWall02.Y = 0;
             MazeWall02.Width = WALL_WIDTH;
             MazeWall02.Height = 100;
+
+            MazeWall01.X = CORRIDOR_WIDTH;
+            MazeWall01.Y = MazeWall02.Y + MazeWall02.Height + CORRIDOR_WIDTH;
+            MazeWall01.Width = MazeWall02.X + MazeWall02.Width;
+            MazeWall01.Height = WALL_WIDTH;
+
+            MazeWall03.X = MazeWall01.Width + CORRIDOR_WIDTH;
+            MazeWall03.Y = CORRIDOR_WIDTH;
+            MazeWall03.Width = WALL_WIDTH;
+            MazeWall03.Height = MazeWall02.Height + WALL_WIDTH;
+
+            MazeWall04.X = MazeWall03.X + MazeWall03.Width + CORRIDOR_WIDTH;
+            MazeWall04.Y = 0;
+            MazeWall04.Width = WALL_WIDTH;
+            MazeWall04.Height = MazeWall01.Y + MazeWall01.Height + CORRIDOR_WIDTH;
         }
 
         public void LoadContent(ContentManager content)
@@ -80,8 +93,10 @@ namespace MonoGameWindowsStarter
             spriteBatch.Draw(texture, WallE, Color.Brown);
             spriteBatch.Draw(texture, WallW, Color.Brown);
 
-            spriteBatch.Draw(texture, MazeWall01, Color.Red);
-            spriteBatch.Draw(texture, MazeWall02, Color.Red);
+            spriteBatch.Draw(texture, MazeWall01, Color.Brown);
+            spriteBatch.Draw(texture, MazeWall02, Color.Brown);
+            spriteBatch.Draw(texture, MazeWall03, Color.Brown);
+            spriteBatch.Draw(texture, MazeWall04, Color.Brown);
         }
 	}
 }

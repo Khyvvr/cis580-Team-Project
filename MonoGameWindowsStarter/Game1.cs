@@ -61,8 +61,8 @@ namespace MonoGameWindowsStarter
             player.Bounds.X = 75;
             player.Bounds.Y = 75;
 
-            goal.Width = 120;
-            goal.Height = 120;
+            goal.Width = 200;
+            goal.Height = 150;
             goal.X = walls.WallE.X - goal.Width;
             goal.Y = walls.WallS.Y - goal.Height;
             //fountain.Initialize();
@@ -126,7 +126,9 @@ namespace MonoGameWindowsStarter
                 || (player.Bounds.CollidesWith(walls.WallE))
                 || (player.Bounds.CollidesWith(walls.WallW))
                 || (player.Bounds.CollidesWith(walls.MazeWall01))
-                || (player.Bounds.CollidesWith(walls.MazeWall02)))
+                || (player.Bounds.CollidesWith(walls.MazeWall02))
+                || (player.Bounds.CollidesWith(walls.MazeWall03))
+                || (player.Bounds.CollidesWith(walls.MazeWall04)))
             {
                 player.playerSpeed *= 0;
                 player.gameState = GameState.Over;
